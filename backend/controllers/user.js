@@ -3,7 +3,7 @@ const VerificationToken = require("../model/verificationToken");
 const { sendError } = require("../utils/helper");
 
 const jwt = require('jsonwebtoken');
-const { generateOTP, mailTransport } = require("../utils/mail");
+const { generateOTP, mailTransport, generateEmailTemplate } = require("../utils/mail");
 
 
 exports.createUser = async (req,res) => {
@@ -32,7 +32,7 @@ exports.createUser = async (req,res) => {
         from : "emailverification@email.com",
         to : newUser.email,
         subject : "Verify your email account",
-        html : `<h1>${otp}</h1>`
+        html : generateEmailTemplate(otp),
     })
 
     res.status(201).json({ message: "User created successfully" });

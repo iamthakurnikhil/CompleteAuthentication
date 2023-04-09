@@ -19,6 +19,11 @@ const userSchema = new mongooose.Schema({
         type : String,
         default : "",
     },
+    verified : {
+        type : Boolean,
+        default : false,
+        required : true,
+    }
 });
 
 
